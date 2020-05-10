@@ -1,2 +1,3 @@
-# Swagger-Integration-Tests
-Swagger helper for integration tests
+# Swagger Integration Tests
+A Swagger helper for integration tests
+
