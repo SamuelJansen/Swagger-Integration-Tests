@@ -2,5 +2,5 @@ Globals:
     update-globals: True
     print-status: True
     api:
-        extension: py
-        list: [Globals,Selenium]
+        extension: yml
+        list: [Globals,Selenium,SwaggerIntegrationTests,CourseEditor,CourseDesktop,Application]

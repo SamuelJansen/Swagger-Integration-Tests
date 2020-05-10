@@ -2,8 +2,8 @@ if __name__ == '__main__' :
     from domain.control import Globals
     globals = Globals.Globals(debugStatus = True)
 
-    import SwaggerIntegration
-    swagger = SwaggerIntegration.SwaggerIntegration(globals)
+    import SwaggerIntegrationTests
+    swagger = SwaggerIntegrationTests.SwaggerIntegrationTests(globals)
 
     runTestSet = {
         'Catalog' : [

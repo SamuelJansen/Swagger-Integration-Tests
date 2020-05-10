@@ -1,6 +1,6 @@
 import SeleniumAbstractor, ObjectHelper, SwaggerTestRunner, SettingHelper
 
-class SwaggerIntegration(SeleniumAbstractor.SeleniumAbstractor):
+class SwaggerIntegrationTests(SeleniumAbstractor.SeleniumAbstractor):
 
     def __init__(self,pathMannanger):
 
@@ -68,7 +68,7 @@ class SwaggerIntegration(SeleniumAbstractor.SeleniumAbstractor):
 
     def getFilteredSetting(self,keySetting,testCase):
         return SettingHelper.getFilteredSetting(self.globals.getSetting(keySetting,testCase),self.globals)
-        
+
     def getTestCase(self,tag,testName):
         settingTree = self.globals.getSettingTree(settingFilePath=f'{self.globals.apiPath}{self.globals.baseApiPath}{self.integrationPath}{tag}{self.globals.BACK_SLASH}{testName}.{self.globals.extension}')
         if self.TEST_CASE in settingTree.keys() :
