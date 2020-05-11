@@ -1,10 +1,10 @@
-import SeleniumAbstractor, ObjectHelper, SwaggerTestRunner, SettingHelper
+import SeleniumHelper, ObjectHelper, SwaggerTestRunner, SettingHelper
 
-class SwaggerIntegrationTests(SeleniumAbstractor.SeleniumAbstractor):
+class SwaggerIntegrationTests(SeleniumHelper.SeleniumHelper):
 
-    def __init__(self,pathMannanger):
+    def __init__(self,globals):
 
-        SeleniumAbstractor.SeleniumAbstractor.__init__(self,pathMannanger)
+        SeleniumHelper.SeleniumHelper.__init__(self,globals)
 
         self.EXPAND_OPERATION = 'expand-operation'
         self.TRY_OUT = 'try-out'

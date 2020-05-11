@@ -4,22 +4,17 @@ if __name__ == '__main__' :
 
     import SwaggerIntegrationTests
     swagger = SwaggerIntegrationTests.SwaggerIntegrationTests(globals)
-
     runTestSet = {
-        'Catalog' : [
-            'mustCreateCatalogItemPassingOneUnitsInStock',
-            'mustCreateCatalogItemNotPassingUnitsInStock',
-            'mustCreateCatalogItemPassingZeroUnitsInStock',
-
-            'mustUpdateCatalogItemPassingOneUnitsInStock',
-            'mustUpdateCatalogItemNotPassingUnitsInStock',
-            'mustUpdateCatalogItemPassingZeroUnitsInStock',
-
-            'mustCreateCatalogItemEmployeeBound',
-            'mustCreateCatalogItemEmployeeBoundList'
-        ]
+        'swaggerTagName' : [
+            'swaggerTest_1',
+            'swaggerTest_2',
+            'swaggerTest_3'
+        ],
+        'otherSwaggerTagName' : [
+            'swaggerTest_1',
+            'swaggerTest_2',
+            'swaggerTest_3'
+        ],
     }
-
     swagger.runTestSet(runTestSet)
-
     swagger.closeDriver()
