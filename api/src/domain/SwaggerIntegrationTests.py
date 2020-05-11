@@ -2,7 +2,7 @@ import SeleniumHelper, ObjectHelper, SwaggerTestRunner, SettingHelper
 
 class SwaggerIntegrationTests(SeleniumHelper.SeleniumHelper):
 
-    def __init__(self,globals):
+    def __init__(self,globals,mainSwaggerUrl):
 
         SeleniumHelper.SeleniumHelper.__init__(self,globals)
 
@@ -14,6 +14,7 @@ class SwaggerIntegrationTests(SeleniumHelper.SeleniumHelper):
         self.MICROLIGHT = 'microlight'
         self.TEST_CASE = 'testCase'
 
+        self.mainUrl = mainSwaggerUrl
         self.integrationPath = 'integration\\test\\'
 
     def runTestSet(self,testSet):

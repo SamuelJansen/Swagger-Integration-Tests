@@ -8,6 +8,7 @@ def runTestSet(swagger,testSet) :
 
 def runTestCase(swagger,testCaseKey,testCaseValues) :
     url = swagger.getFilteredSetting('url',testCaseValues)
+    if not url : url = swagger.mainUrl
     tag = swagger.getFilteredSetting('tag',testCaseValues)
     method = swagger.getFilteredSetting('method',testCaseValues)
     verb = swagger.getFilteredSetting('verb',testCaseValues)

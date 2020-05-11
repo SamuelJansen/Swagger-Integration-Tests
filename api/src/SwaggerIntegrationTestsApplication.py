@@ -3,7 +3,8 @@ if __name__ == '__main__' :
     globals = Globals.Globals(debugStatus = True)
 
     import SwaggerIntegrationTests
-    swagger = SwaggerIntegrationTests.SwaggerIntegrationTests(globals)
+    mainSwaggerUrl = 'someMainSwaggerUrl'
+    swagger = SwaggerIntegrationTests.SwaggerIntegrationTests(globals,mainSwaggerUrl)
     runTestSet = {
         'swaggerTagName' : [
             'swaggerTest_1',
@@ -11,9 +12,9 @@ if __name__ == '__main__' :
             'swaggerTest_3'
         ],
         'otherSwaggerTagName' : [
-            'swaggerTest_1',
-            'swaggerTest_2',
-            'swaggerTest_3'
+            'otherSwaggerTest_1',
+            'otherSwaggerTest_2',
+            'otherSwaggerTest_3'
         ],
     }
     swagger.runTestSet(runTestSet)
