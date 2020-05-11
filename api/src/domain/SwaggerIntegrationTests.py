@@ -2,7 +2,9 @@ import SeleniumHelper, ObjectHelper, SwaggerTestRunner, SettingHelper
 
 class SwaggerIntegrationTests(SeleniumHelper.SeleniumHelper):
 
-    def __init__(self,globals,mainSwaggerUrl):
+    def __init__(self,globals):
+
+        KW_MAIN_SWAGGER_URL = 'main-swagger-url'
 
         SeleniumHelper.SeleniumHelper.__init__(self,globals)
 
@@ -14,8 +16,9 @@ class SwaggerIntegrationTests(SeleniumHelper.SeleniumHelper):
         self.MICROLIGHT = 'microlight'
         self.TEST_CASE = 'testCase'
 
-        self.mainUrl = mainSwaggerUrl
-        self.integrationPath = 'integration\\test\\'
+        self.integrationPath = f'integration{globals.BACK_SLASH}test{globals.BACK_SLASH}'
+        self.mainSwaggerUrlFilePath = f'{globals.apiPath}{globals.baseApiPath}integration{globals.BACK_SLASH}integration.yml'
+        self.mainUrl = self.getFilteredSetting(KW_MAIN_SWAGGER_URL,globals.getSettingTree(settingFilePath=self.mainSwaggerUrlFilePath))
 
     def runTestSet(self,testSet):
         SwaggerTestRunner.runTestSet(self,testSet)
