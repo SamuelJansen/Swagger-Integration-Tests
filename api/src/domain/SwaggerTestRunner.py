@@ -1,38 +1,48 @@
-def runTestSet(swagger,testSet) :
-    globals = swagger.globals
-    for tag in testSet.keys() :
-        for testName in testSet[tag] :
-            testCase = swagger.getTestCase(tag,testName)
-            for testCaseKey,testCaseValues in testCase.items() :
-                runTestCase(swagger,testCaseKey,testCaseValues)
+import SwaggerIntegrationTests
 
-def runTestCase(swagger,testCaseKey,testCaseValues) :
+integration = SwaggerIntegrationTests
+
+def runTestSet(swagger,testSet) :
+    for tagSet in testSet.keys() :
+        for testName in testSet[tagSet] :
+            testCase = swagger.getTestCase(tagSet,testName)
+            for testCaseKey,testCaseValues in testCase.items() :
+                runTestCase(swagger,tagSet,testCaseKey,testCaseValues)
+
+def runTestCase(swagger,tagSet,testCaseKey,testCaseValues) :
     url = getUrl(swagger,testCaseValues)
-    tag = swagger.getFilteredSetting('tag',testCaseValues)
-    method = swagger.getFilteredSetting('method',testCaseValues)
-    verb = swagger.getFilteredSetting('verb',testCaseValues)
-    processingTime = swagger.getFilteredSetting('processingTime',testCaseValues)
-    payload = swagger.getFilteredSetting('payload',testCaseValues)
-    expectedResponse =swagger.getFilteredSetting('expectedResponse',testCaseValues)
+    tag = getTag(swagger,testCaseValues,tagSet)
+    method = swagger.getFilteredSetting(integration.METHOD,testCaseValues)
+    verb = swagger.getFilteredSetting(integration.VERB,testCaseValues)
+    processingTime = swagger.getFilteredSetting(integration.PROCESSING_TIME,testCaseValues)
+    payload = swagger.getFilteredSetting(integration.PAYLOAD,testCaseValues)
+    expectedResponse =swagger.getFilteredSetting(integration.EXPECTED_RESPONSE,testCaseValues)
 
     response,success = swagger.runTest(url,tag,method,verb,processingTime,payload,expectedResponse)
     print(f'''
         {testCaseKey}''',end='')
     if success :
         print(f'''
-            Success''')
+            {integration.SUCCESS_MESSAGE}''')
     else :
         print(f'''
-            url = {url}
-            tag = {tag}
-            method = {method}
-            verb = {verb}
-            processingTime = {processingTime}
-            payload = {payload}
-            expectedResponse = {expectedResponse}
-            response = {response}''')
+            {integration.URL} = {url}
+            {integration.TAG} = {tag}
+            {integration.METHOD} = {method}
+            {integration.VERB} = {verb}
+            {integration.PROCESSING_TIME} = {processingTime}
+            {integration.PAYLOAD} = {payload}
+            {integration.EXPECTED_RESPONSE} = {expectedResponse}
+            {integration.RESPONSE} = {response}''')
 
 def getUrl(swagger,testCaseValues) :
-    url = swagger.getFilteredSetting('url',testCaseValues)
-    if not url : url = swagger.mainUrl
+    url = swagger.getFilteredSetting(integration.URL,testCaseValues)
+    if not url :
+        return swagger.mainUrl
     return url
+
+def getTag(swagger,testCaseValues,tagSet) :
+    tag = swagger.getFilteredSetting(integration.TAG,testCaseValues)
+    if not tag :
+        return tagSet
+    return tag

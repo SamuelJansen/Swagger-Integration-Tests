@@ -5,16 +5,15 @@ if __name__ == '__main__' :
     import SwaggerIntegrationTests
     mainSwaggerUrl = 'someMainSwaggerUrl'
     swagger = SwaggerIntegrationTests.SwaggerIntegrationTests(globals,mainSwaggerUrl)
+
     runTestSet = {
         'swaggerTagName' : [
-            'swaggerTest_1',
-            'swaggerTest_2',
-            'swaggerTest_3'
+            'testNameExample',
+            'testCaseNameExample'
         ],
         'otherSwaggerTagName' : [
-            'otherSwaggerTest_1',
-            'otherSwaggerTest_2',
-            'otherSwaggerTest_3'
+            'otherTestNameExample',
+            'otherTestCaseNameExample'
         ],
     }
     swagger.runTestSet(runTestSet)
