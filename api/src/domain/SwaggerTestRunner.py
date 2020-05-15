@@ -1,4 +1,4 @@
-import SwaggerIntegrationTests
+import SwaggerIntegrationTests, ObjectHelper
 
 integration = SwaggerIntegrationTests
 
@@ -16,9 +16,14 @@ def runTestCase(swagger,tagSet,testCaseKey,testCaseValues) :
     verb = swagger.getFilteredSetting(integration.VERB,testCaseValues)
     processingTime = swagger.getFilteredSetting(integration.PROCESSING_TIME,testCaseValues)
     payload = swagger.getFilteredSetting(integration.PAYLOAD,testCaseValues)
-    expectedResponse =swagger.getFilteredSetting(integration.EXPECTED_RESPONSE,testCaseValues)
+    expectedResponse = swagger.getFilteredSetting(integration.EXPECTED_RESPONSE,testCaseValues)
+    ignoreKeyList = getIgnoreKeyList(swagger,testCaseValues)
 
-    response,success = swagger.runTest(url,tag,method,verb,processingTime,payload,expectedResponse)
+    response = swagger.runTest(url,tag,method,verb,processingTime,payload,expectedResponse)
+
+    filteredExpectedResponse = ObjectHelper.filterIgnoreKeyList(expectedResponse,ignoreKeyList)
+    filteredResponse = ObjectHelper.filterIgnoreKeyList(response,ignoreKeyList)
+    success = ObjectHelper.equal(filteredResponse,filteredExpectedResponse)
     print(f'''
         {testCaseKey}''',end='')
     if success :
@@ -46,3 +51,9 @@ def getTag(swagger,testCaseValues,tagSet) :
     if not tag :
         return tagSet
     return tag
+
+def getIgnoreKeyList(swagger,testCaseValues) :
+    ignoreKeyList = swagger.getFilteredSetting(integration.IGNORE_KEY_VALUE_LIST,testCaseValues)
+    if ignoreKeyList :
+        return ignoreKeyList
+    return []

@@ -1,4 +1,4 @@
-import SeleniumHelper, ObjectHelper, SwaggerTestRunner, SettingHelper
+import SeleniumHelper, SwaggerTestRunner, SettingHelper
 
 INTEGRATION_FOLDER = 'integration'
 
@@ -14,6 +14,7 @@ PROCESSING_TIME = 'processingTime'
 PAYLOAD = 'payload'
 EXPECTED_RESPONSE = 'expectedResponse'
 RESPONSE = 'response'
+IGNORE_KEY_VALUE_LIST = 'ignore-key-value-list'
 
 SUCCESS_MESSAGE = 'Success'
 
@@ -38,7 +39,7 @@ class SwaggerIntegrationTests(SeleniumHelper.SeleniumHelper):
         self.hitExecute(swaggerMethod)
         self.waitProcessingTime()
         response = self.getResponse(swaggerMethod)
-        return response,ObjectHelper.equal(response,expectedResponse)
+        return response
 
     def resetValues(self,url,tag,method,verb,processingTime,payload,expectedResponse):
         self.url = url
@@ -76,7 +77,7 @@ class SwaggerIntegrationTests(SeleniumHelper.SeleniumHelper):
         self.wait(processingTime=self.processingTime)
 
     def getFilteredSetting(self,keySetting,testCase):
-        return SettingHelper.getFilteredSetting(self.globals.getSetting(keySetting,testCase),self.globals)
+        return SettingHelper.getFilteredSetting(self.globals.getSetting(keySetting,settingTree=testCase),self.globals)
 
     def getTestCase(self,tag,testName):
         settingTree = self.globals.getSettingTree(settingFilePath=f'{self.integrationPath}{tag}{self.globals.BACK_SLASH}{testName}.{self.globals.extension}')
