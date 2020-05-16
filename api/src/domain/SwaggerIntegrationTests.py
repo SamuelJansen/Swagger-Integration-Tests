@@ -20,8 +20,8 @@ SUCCESS_MESSAGE = 'Success'
 
 class SwaggerIntegrationTests(SeleniumHelper.SeleniumHelper):
 
-    def __init__(self,globals):
-        SeleniumHelper.SeleniumHelper.__init__(self,globals)
+    def __init__(self,globals,**kargs):
+        SeleniumHelper.SeleniumHelper.__init__(self,globals,**kargs)
         self.integrationPath = f'{globals.apiPath}{globals.baseApiPath}{INTEGRATION_FOLDER}{globals.BACK_SLASH}'
         self.mainSwaggerUrlFilePath = f'{self.integrationPath}{KW_INTEGRATION}.{self.globals.extension}'
         self.mainUrl = self.getFilteredSetting(KW_MAIN_SWAGGER_URL,globals.getSettingTree(settingFilePath=self.mainSwaggerUrlFilePath))
@@ -42,6 +42,7 @@ class SwaggerIntegrationTests(SeleniumHelper.SeleniumHelper):
         return response
 
     def resetValues(self,url,tag,method,verb,processingTime,payload,expectedResponse):
+        globals = self.globals
         self.url = url
         self.tag = tag
         self.method = method
@@ -49,7 +50,7 @@ class SwaggerIntegrationTests(SeleniumHelper.SeleniumHelper):
         self.processingTime = processingTime
         self.payload = payload
         self.expectedResponse = expectedResponse
-        self.findByIdRequest = f'{SwaggerKeyWord.OPERATION_TAG_DASH}{self.tag}'
+        self.findByIdRequest = f'{SwaggerKeyWord.OPERATION_TAG_DASH}{self.tag.replace(globals.SPACE,globals.UNDERSCORE)}'
         self.accessIdRequest = f'{SwaggerKeyWord.OPERATIONS_DASH}{self.tag}-{self.method}{SwaggerKeyWord.USING}{self.verb}'
 
     def accessSwaggerUrl(self):

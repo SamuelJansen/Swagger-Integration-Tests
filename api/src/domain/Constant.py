@@ -5,3 +5,7 @@ SPACE = ''' '''
 NOTHING = ''''''
 TRIPLE_SINGLE_QUOTE = """'''"""
 TRIPLE_DOUBLE_QUOTE = '''"""'''
+SINGLE_QUOTE = """'"""
+DOUBLE_QUOTE = '''"'''
+COMA = ''','''
+COLON = ''':'''

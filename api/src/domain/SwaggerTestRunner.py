@@ -19,10 +19,16 @@ def runTestCase(swagger,tagSet,testCaseKey,testCaseValues) :
     expectedResponse = swagger.getFilteredSetting(integration.EXPECTED_RESPONSE,testCaseValues)
     ignoreKeyList = getIgnoreKeyList(swagger,testCaseValues)
 
+    print(f'ignoreKeyList = {ignoreKeyList}')
+
     response = swagger.runTest(url,tag,method,verb,processingTime,payload,expectedResponse)
 
-    filteredExpectedResponse = ObjectHelper.filterIgnoreKeyList(expectedResponse,ignoreKeyList)
-    filteredResponse = ObjectHelper.filterIgnoreKeyList(response,ignoreKeyList)
+    filteredExpectedResponse = ObjectHelper.filterIgnoreKeyList(expectedResponse,ignoreKeyList,globals)
+    filteredResponse = ObjectHelper.filterIgnoreKeyList(response,ignoreKeyList,globals)
+
+    print(f'filteredExpectedResponse = {filteredExpectedResponse}')
+    print(f'filteredResponse = {filteredResponse}')
+
     success = ObjectHelper.equal(filteredResponse,filteredExpectedResponse)
     print(f'''
         {testCaseKey}''',end='')
