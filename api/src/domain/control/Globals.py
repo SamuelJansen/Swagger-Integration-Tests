@@ -195,10 +195,6 @@ class Globals:
         self.makeApisAvaliable()
 
     def makeApisAvaliable(self) :
-<<<<<<< HEAD
-        # self.apisTree = []
-=======
->>>>>>> origin/master
         self.apisTree = {}
         for apiName in self.apiNameList :
             try :
