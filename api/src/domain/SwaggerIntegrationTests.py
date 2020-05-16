@@ -99,7 +99,7 @@ class SwaggerKeyWord:
     HIGHLIGHT_CODE = 'highlight-code'
     MICROLIGHT = 'microlight'
 
-    ###- this secsion is used only as part of the full swagger html class or ir or whatever
+    ###- this seccion is used only as part of the full swagger html class or ir or whatever
     OPERATIONS_DASH = 'operations-'
     OPERATION_TAG_DASH = 'operations-tag-'
     USING = 'Using'
