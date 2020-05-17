@@ -20,8 +20,8 @@ SUCCESS_MESSAGE = 'Success'
 
 class SwaggerIntegrationTests(SeleniumHelper.SeleniumHelper):
 
-    def __init__(self,globals,**kargs):
-        SeleniumHelper.SeleniumHelper.__init__(self,globals,**kargs)
+    def __init__(self,globals,**kwargs):
+        SeleniumHelper.SeleniumHelper.__init__(self,globals,**kwargs)
         self.integrationPath = f'{globals.apiPath}{globals.baseApiPath}{INTEGRATION_FOLDER}{globals.BACK_SLASH}'
         self.mainSwaggerUrlFilePath = f'{self.integrationPath}{KW_INTEGRATION}.{self.globals.extension}'
         self.mainUrl = self.getFilteredSetting(KW_MAIN_SWAGGER_URL,globals.getSettingTree(settingFilePath=self.mainSwaggerUrlFilePath))
