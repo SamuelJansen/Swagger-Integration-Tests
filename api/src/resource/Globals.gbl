@@ -3,4 +3,4 @@ Globals:
     print-status: True
     api:
         extension: yml
-        list: [Globals,SeleniumHelper,SwaggerIntegrationTests]
+        list: [Globals,SeleniumHelper,SwaggerIntegrationTests,Helper]
