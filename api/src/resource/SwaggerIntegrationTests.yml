@@ -1,6 +1,0 @@
-SwaggerIntegrationTests:
-    api:
-        extension: yml
-        dependency:
-            update: False
-            list: [chromedriver,selenium,numpy,Popen,Path]
