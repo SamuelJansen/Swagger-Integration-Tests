@@ -1,6 +1,6 @@
 from distutils.core import setup
 
-version = '0.0.2'
+version = '0.0.3'
 name = 'swagger_integration_tests'
 url = f'https://github.com/SamuelJansen/{name}/'
 

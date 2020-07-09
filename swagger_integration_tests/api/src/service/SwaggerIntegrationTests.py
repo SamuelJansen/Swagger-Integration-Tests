@@ -39,12 +39,12 @@ class SwaggerIntegrationTests(SeleniumHelper.SeleniumHelper):
 
     def runTestSet(self,testSet):
         try :
-            swagger.newDriver()
+            self.newDriver()
             try :
                 SwaggerTestRunner.runTestSet(self,testSet)
             except Exception as exception :
                 log.error(self.__class__, 'Error runing SwaggerTestRunner.runTestSet() method', exception)
-            swagger.closeDriver()
+            self.closeDriver()
         except Exception as exception :
             log.error(self.__class__, 'Error runing test set. Most likely related to web_driver', exception)
 
