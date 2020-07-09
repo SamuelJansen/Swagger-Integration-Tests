@@ -12,7 +12,6 @@ def runTestSet(swagger,testSet) :
                 runTestCase(swagger,tagSet,testCaseKey,testCaseValues)
 
 def runTestCase(swagger,tagSet,testCaseKey,testCaseValues) :
-    swagger.newDriver()
     url = getUrl(swagger,testCaseValues)
     tag = getTag(swagger,testCaseValues,tagSet)
     method = swagger.getFilteredSetting(integration.METHOD,testCaseValues)
@@ -24,7 +23,6 @@ def runTestCase(swagger,tagSet,testCaseKey,testCaseValues) :
     expectedResponse = swagger.getFilteredSetting(integration.EXPECTED_RESPONSE,testCaseValues)
     ignoreKeyList = getIgnoreKeyList(swagger,testCaseValues)
     response = swagger.runTest(url,tag,method,verb,authorizaton,processingTime,pathVariableSet,payload,expectedResponse)
-    swagger.closeDriver()
 
     filteredExpectedResponseAsDict = ObjectHelper.filterIgnoreKeyList(getObjectAsJson(swagger,expectedResponse),ignoreKeyList)
     filteredResponseAsDict = ObjectHelper.filterIgnoreKeyList(getObjectAsJson(swagger,response),ignoreKeyList)

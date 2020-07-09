@@ -1,6 +1,6 @@
 from swagger_integration_tests.api.src.service import SwaggerTestRunner
 from python_selenium_helper import SeleniumHelper
-from python_helper import SettingHelper
+from python_helper import SettingHelper, log
 
 INTEGRATION_FOLDER = 'integration'
 
@@ -38,7 +38,15 @@ class SwaggerIntegrationTests(SeleniumHelper.SeleniumHelper):
         self.authorizationUser = self.getFilteredSetting(KW_AUTHORIZATION_USER,globals.getSettingTree(settingFilePath=self.mainSwaggerUrlFilePath))
 
     def runTestSet(self,testSet):
-        SwaggerTestRunner.runTestSet(self,testSet)
+        try :
+            swagger.newDriver()
+            try :
+                SwaggerTestRunner.runTestSet(self,testSet)
+            except Exception as exception :
+                log.error(self.__class__, 'Error runing SwaggerTestRunner.runTestSet() method', exception)
+            swagger.closeDriver()
+        except Exception as exception :
+            log.error(self.__class__, 'Error runing test set. Most likely related to web_driver', exception)
 
     def runTest(self,url,tag,method,verb,authorization,processingTime,pathVariableSet,payload,expectedResponse) :
         self.resetValues(url,tag,method,verb,authorization,processingTime,pathVariableSet,payload,expectedResponse)
