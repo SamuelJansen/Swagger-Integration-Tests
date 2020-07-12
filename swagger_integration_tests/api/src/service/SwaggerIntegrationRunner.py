@@ -1,5 +1,7 @@
 from swagger_integration_tests.api.src.service import SwaggerIntegrationTests
 
+print('tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt')
+
 class SwaggerIntegrationRunner(SwaggerIntegrationTests.SwaggerIntegrationTests):
 
     _0_API_KEY = 0
