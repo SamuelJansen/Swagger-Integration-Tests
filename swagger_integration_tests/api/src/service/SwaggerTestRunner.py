@@ -19,7 +19,7 @@ def runTestCase(swagger,tagSet,testCaseKey,testCaseValues) :
     authorizaton = getAuthoization(swagger,testCaseValues)
     processingTime = swagger.getFilteredSetting(integration.PROCESSING_TIME,testCaseValues)
     pathVariableSet = swagger.getFilteredSetting(integration.PATH_VARIABLE_SET,testCaseValues)
-    payload = swagger.getFilteredSetting(integration.PAYLOAD,testCaseValues)
+    payload = swagger.getFilteredSetting(integration.REQUEST,testCaseValues)
     expectedResponse = swagger.getFilteredSetting(integration.EXPECTED_RESPONSE,testCaseValues)
     ignoreKeyList = getIgnoreKeyList(swagger,testCaseValues)
     response = swagger.runTest(url,tag,method,verb,authorizaton,processingTime,pathVariableSet,payload,expectedResponse)
@@ -41,7 +41,7 @@ def runTestCase(swagger,tagSet,testCaseKey,testCaseValues) :
         {integration.VERB} ==> {verb}
         {integration.PROCESSING_TIME} ==> {processingTime}
         {integration.PATH_VARIABLE_SET} ==> {pathVariableSet}
-        {integration.PAYLOAD} ==> {payload}
+        {integration.REQUEST} ==> {payload}
         {integration.EXPECTED_RESPONSE} ==> {expectedResponse}
         {integration.RESPONSE} ==> {response}'''
     print(logContent + '\n\n')

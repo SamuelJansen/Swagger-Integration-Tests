@@ -2,28 +2,32 @@ from swagger_integration_tests.api.src.service import SwaggerTestRunner
 from python_selenium_helper import SeleniumHelper
 from python_helper import SettingHelper, log
 
-INTEGRATION_FOLDER = 'integration'
+INTEGRATION = 'integration'
 
 KW_AUTHORIZATION = 'authorization'
 KW_MAIN_SWAGGER_URL = 'main-swagger-url'
 KW_AUTHORIZATION_ADMIN = f'{KW_AUTHORIZATION}-admin'
 KW_AUTHORIZATION_USER = f'{KW_AUTHORIZATION}-user'
-KW_TEST_CASE = 'testCase'
-KW_INTEGRATION = INTEGRATION_FOLDER
 
+TEST_CASE = 'test-case'
 URL = 'url'
 TAG = 'tag'
 METHOD = 'method'
 VERB = 'verb'
 AUTHORIZATION = KW_AUTHORIZATION
-PROCESSING_TIME = 'processingTime'
-PATH_VARIABLE_SET = 'pathVariableSet'
-PAYLOAD = 'payload'
-EXPECTED_RESPONSE = 'expectedResponse'
+PROCESSING_TIME = 'processing-time'
+PATH_VARIABLE_SET = 'query-param-set'
+PATH_VARIABLE_SET = 'path-variable-set'
+REQUEST = 'request'
 RESPONSE = 'response'
+EXPECTED_RESPONSE = f'expected-{RESPONSE}'
 IGNORE_KEY_VALUE_LIST = 'ignore-key-value-list'
 
-VERB_GET = 'GET'
+GET = 'GET'
+POST = 'POST'
+PUT = 'PUT'
+PATCH = 'PATCH'
+DELETE = 'DELETE'
 
 SUCCESS_MESSAGE = 'Success'
 
@@ -31,8 +35,8 @@ class SwaggerIntegrationTests(SeleniumHelper.SeleniumHelper):
 
     def __init__(self,globals,**kwargs):
         SeleniumHelper.SeleniumHelper.__init__(self,globals,**kwargs)
-        self.integrationPath = f'{globals.apiPath}{globals.baseApiPath}{INTEGRATION_FOLDER}{globals.BACK_SLASH}'
-        self.mainSwaggerUrlFilePath = f'{self.integrationPath}{KW_INTEGRATION}.{self.globals.extension}'
+        self.integrationPath = f'{globals.apiPath}{globals.baseApiPath}{INTEGRATION}{globals.OS_SEPARATOR}'
+        self.mainSwaggerUrlFilePath = f'{self.integrationPath}{INTEGRATION}.{self.globals.extension}'
         self.mainUrl = self.getFilteredSetting(KW_MAIN_SWAGGER_URL,globals.getSettingTree(settingFilePath=self.mainSwaggerUrlFilePath))
         self.authorizationAdmin = self.getFilteredSetting(KW_AUTHORIZATION_ADMIN,globals.getSettingTree(settingFilePath=self.mainSwaggerUrlFilePath))
         self.authorizationUser = self.getFilteredSetting(KW_AUTHORIZATION_USER,globals.getSettingTree(settingFilePath=self.mainSwaggerUrlFilePath))
@@ -108,7 +112,7 @@ class SwaggerIntegrationTests(SeleniumHelper.SeleniumHelper):
 
     def typePayload(self,verb,swaggerMethod):
         if self.payload :
-            if not VERB_GET == verb :
+            if not GET == verb :
                 self.typeInSwagger(self.payload,self.findByClass(SwaggerKeyWord.BODY_PARAM,swaggerMethod))
             else :
                 self.globals.error(self.__class__,"GET method do not support payload.",None)
@@ -128,9 +132,9 @@ class SwaggerIntegrationTests(SeleniumHelper.SeleniumHelper):
 
     def getTestCase(self,tag,testName):
         settingTree = self.globals.getSettingTree(settingFilePath=f'{self.integrationPath}{tag}{self.globals.BACK_SLASH}{testName}.{self.globals.extension}')
-        if KW_TEST_CASE in settingTree.keys() :
+        if TEST_CASE in settingTree.keys() :
             newSettingTree = {}
-            for settingTreeKey, settingTreeValue in settingTree[KW_TEST_CASE].items() :
+            for settingTreeKey, settingTreeValue in settingTree[TEST_CASE].items() :
                 newSettingTree[f'{testName}.{settingTreeKey}'] = settingTreeValue
             return newSettingTree
         return {testName : settingTree}

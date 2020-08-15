@@ -39,8 +39,9 @@ class SwaggerIntegrationRunner(SwaggerIntegrationTests.SwaggerIntegrationTests):
         }
 
     def repository(self,logName,logContent):
+        g = self.globals
         extension = 'yml'
-        logPath = f'{self.globals.apiPath}{self.globals.baseApiPath}repository\\'
+        logPath = f'{g.apiPath}{g.baseApiPath}repository{g.OS_SEPARATOR}'
         with open(f'{logPath}{logName}.{extension}', 'w+', encoding="utf-8") as logFile :
             logFile.write(logContent)
 
@@ -50,10 +51,10 @@ class SwaggerIntegrationRunner(SwaggerIntegrationTests.SwaggerIntegrationTests):
         return f'{self.__class__.__name__} process finished.'
 
     def getTestSet(self,tagList):
-        globals = self.globals
-        completeTestSet = globals.getPathTreeFromPath(self.integrationPath)
+        g = self.globals
+        completeTestSet = g.getPathTreeFromPath(self.integrationPath)
         for key in completeTestSet.keys() :
-            completeTestSet[key] = self.globals.getFileNameList(f'{self.integrationPath}{key}{self.globals.BACK_SLASH}')
+            completeTestSet[key] = g.getFileNameList(f'{self.integrationPath}{key}{g.OS_SEPARATOR}')
         if tagList :
             return self.buildTestSet(tagList,completeTestSet)
         else :
